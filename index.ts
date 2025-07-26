@@ -1,8 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import { toNodeHandler } from "better-auth/node";
+
+//better auth
+import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
 import { auth } from "./src/lib/auth";
+
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors"
@@ -17,7 +20,15 @@ app.use(cors({
   credentials: true
 }));
 
+//better auth authenticate + session handler
 app.all('/api/auth/{*any}', toNodeHandler(auth));
+app.get("/api/me", async (req, res) => {
+  const session = await auth.api.getSession({
+     headers: fromNodeHeaders(req.headers),
+   });
+ return res.json(session);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
