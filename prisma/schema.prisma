@@ -88,7 +88,7 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   comments Comment[]
-  likes    Like[] // 👈 New: Likes for this post
+  likes    Like[]
 }
 
 model Like {
@@ -100,7 +100,7 @@ model Like {
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([postId, userId]) // 👈 Prevent same user liking same post twice
+  @@unique([postId, userId])
 }
 
 model Comment {
