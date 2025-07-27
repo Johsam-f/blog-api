@@ -93,9 +93,12 @@ async function likePost(req:AuthenticatedRequest, res:Response){
 }
 
 async function unlikePost(req:AuthenticatedRequest, res:Response){
+    if (!req.user) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
     const { id } = req.params;
     try {
-        await unlike(id as string);
+        await unlike(id as string, req.user?.id);
         return res.status(200).json({ message: 'Post unliked' });
     } catch (error) {
         console.error('error getting posts:', error);
