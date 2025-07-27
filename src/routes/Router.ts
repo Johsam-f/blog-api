@@ -20,21 +20,21 @@ router.get("/dashboard", (req, res) => {
 });
 
 // posts
-router.get('/api/posts', getAllPosts)                    // GET all published posts
-router.get('/api/posts/:slug', getSinglePost)            // GET one post by slug
-router.post('/api/posts', createPost)                    // CREATE a new post
-router.put('/api/posts/:id', updatePost)                 // UPDATE post by ID
-router.delete('/api/posts/:id', deletePost)              // DELETE post by ID
+router.get('/api/posts', getAllPosts)                    
+router.get('/api/posts/:slug', getSinglePost)            
+router.post('/api/posts', createPost)                    
+router.put('/api/posts/:id', updatePost)
+router.delete('/api/posts/:id', deletePost)              
 
 // likes
-router.post('/api/posts/:id/like', likePost)             // LIKE a post
-router.delete('/api/posts/:id/like', unlikePost)         // UNLIKE a post
-router.get('/api/posts/:id/likes', getPostLikes)         // GET all likes for a post
+router.post('/api/posts/:id/like', likePost)             
+router.delete('/api/posts/:id/like', unlikePost)
+router.get('/api/posts/:id/likes', getPostLikes)         
 
 // comments
-router.post('/api/posts/:id/comments', createComment)    // CREATE top-level comment
-router.get('/api/posts/:id/comments', getPostComments)   // GET all comments for a post
-router.post('/api/comments/:id/reply', replyToComment)   // REPLY to a comment
+router.post('/api/posts/:id/comments', createComment)    
+router.get('/api/posts/:id/comments', getPostComments)   
+router.post('/api/posts/:postId/comments/:id/reply', replyToComment)   
 
 
 export default router;
