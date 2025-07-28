@@ -15,7 +15,7 @@ const app = express();
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors({
-  origin: "http://localhost:5173", // Frontend URL
+  origin: ["http://localhost:5173", "http://localhost:5000"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
