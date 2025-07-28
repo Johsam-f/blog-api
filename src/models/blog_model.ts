@@ -13,9 +13,7 @@ export async function newPost(title:string, content: string, slug: string, autho
 }
 
 export async function AllPosts() {
-    return await prisma.post.findMany({
-        where: { published: true }
-    })
+    return await prisma.post.findMany()
 }
 
 export async function singlePost(slug:string) {
