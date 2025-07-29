@@ -65,9 +65,9 @@ export async function unlike(postId: string, userId: string) {
     });
 }
 
-export async function postLikes(postId:string) {
-    return await prisma.like.count({
-        where: { postId },
+export async function getLikesForUser(userId:string) {
+    return await prisma.like.findMany({
+        where: { userId },
     });  
 }
 

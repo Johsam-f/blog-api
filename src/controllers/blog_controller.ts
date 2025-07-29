@@ -2,7 +2,7 @@ import { type Request, type Response } from 'express';
 import { slugify } from '../lib/slugify';
 import { 
     newPost, AllPosts, singlePost, updatedPost, _delete, 
-    like, unlike, postLikes, newComment, allComments, newReply
+    like, unlike, getLikesForUser, newComment, allComments, newReply
 } from '../models/blog_model';
 
 interface AuthenticatedRequest extends Request {
@@ -109,10 +109,12 @@ async function unlikePost(req:AuthenticatedRequest, res:Response){
     }
 }
 
-async function getPostLikes(req:AuthenticatedRequest, res:Response){
-    const { id } = req.params;
+async function getLikes(req:AuthenticatedRequest, res:Response){
+    if (!req.user) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
     try {
-        const likes = await postLikes(id as string);
+        const likes = await getLikesForUser(req.user?.id);
         return res.status(200).json(likes);
     } catch (error) {
         console.error('error getting posts:', error);
@@ -172,7 +174,7 @@ export {
     deletePost,
     likePost,
     unlikePost,
-    getPostLikes,
+    getLikes,
     createComment,
     getPostComments,
     replyToComment,

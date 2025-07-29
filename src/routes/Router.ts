@@ -8,7 +8,7 @@ import {
     deletePost,
     likePost,
     unlikePost,
-    getPostLikes,
+    getLikes,
     createComment,
     getPostComments,
     replyToComment,
@@ -26,8 +26,8 @@ router.get("/adminDashboard", (req, res) => {
 });
 
 // posts
-router.get('/api/posts', getAllPosts)                    
-router.get('/api/posts/:slug', getSinglePost)            
+router.get('/api/posts', withSession, getAllPosts)                    
+router.get('/api/posts/:slug', withSession, getSinglePost)            
 router.post('/api/posts', withSession, createPost)                    
 router.put('/api/posts/:id', withSession, updatePost)
 router.delete('/api/posts/:id', withSession, deletePost)              
@@ -35,11 +35,11 @@ router.delete('/api/posts/:id', withSession, deletePost)
 // likes
 router.post('/api/posts/:id/like', withSession, likePost)             
 router.delete('/api/posts/:id/like', withSession, unlikePost)
-router.get('/api/posts/:id/likes', getPostLikes)         
+router.get('/api/likes', withSession, getLikes)         
 
 // comments
 router.post('/api/posts/:id/comments', withSession, createComment)    
-router.get('/api/posts/:id/comments', getPostComments)   
+router.get('/api/posts/:id/comments', withSession, getPostComments)   
 router.post('/api/posts/:postId/comments/:id/reply', withSession, replyToComment)   
 
 
