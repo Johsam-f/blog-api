@@ -13,7 +13,16 @@ export async function newPost(title:string, content: string, slug: string, autho
 }
 
 export async function AllPosts() {
-    return await prisma.post.findMany()
+    return await prisma.post.findMany({
+        include: {
+            _count: {
+                select: { 
+                    likes: true,
+                    comments: true
+                 }
+            }
+        }
+    })
 }
 
 export async function singlePost(slug:string) {
