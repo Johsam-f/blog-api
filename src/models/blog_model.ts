@@ -20,7 +20,12 @@ export async function AllPosts() {
                     likes: true,
                     comments: true
                  }
-            }
+            },
+            author: {
+                select: {
+                  name: true
+                }
+            },
         }
     })
 }
@@ -74,7 +79,14 @@ export async function newComment(content:string, postId:string, authorId:string)
 
 export async function allComments(postId:string) {
     return await prisma.comment.findMany({
-        where: { postId }
+        where: { postId },
+        include: {
+            author: {
+                select: {
+                  name: true
+                }
+              },
+        }
     })
 }
 
