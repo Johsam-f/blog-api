@@ -18,11 +18,11 @@ import { withSession } from '../middleware/withSession';
 
 //redirect client (google auth)
 router.get("/dashboard", (req, res) => {
-    res.redirect("http://localhost:5173/dashboard");
+    res.redirect("http://localhost:5173");
 });
 
 router.get("/adminDashboard", (req, res) => {
-    res.redirect("http://localhost:5000/dashboard");
+    res.redirect("http://localhost:5000");
 });
 
 // posts
