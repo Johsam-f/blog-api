@@ -1,4 +1,3 @@
-import { use } from "react";
 import { prisma } from "../lib/prisma";
 
 export async function newPost(title:string, content: string, slug: string, authorId: string) {
@@ -14,6 +13,9 @@ export async function newPost(title:string, content: string, slug: string, autho
 
 export async function AllPosts() {
     return await prisma.post.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
         include: {
             _count: {
                 select: { 
@@ -80,6 +82,9 @@ export async function newComment(content:string, postId:string, authorId:string)
 export async function allComments(postId:string) {
     return await prisma.comment.findMany({
         where: { postId },
+        orderBy: {
+            createdAt: "desc",
+        },
         include: {
             author: {
                 select: {
