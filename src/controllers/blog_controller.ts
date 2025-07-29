@@ -19,7 +19,6 @@ async function createPost(req:AuthenticatedRequest, res:Response) {
         return res.status(401).json({ error: "Not authenticated" });
     }
     const { title, content } = req.body;
-    console.log("New post:", title, content);
 
     if (!title || !content) {
         return res.status(400).json({ error: 'Title and content are required' });
@@ -38,7 +37,6 @@ async function createPost(req:AuthenticatedRequest, res:Response) {
 async function getAllPosts(req:AuthenticatedRequest, res:Response){
     try {
         const posts = await AllPosts();
-        console.log("Fetched posts:", posts);
         return res.status(200).json(posts)
     } catch (error) {
         console.error('error getting posts:', error);
