@@ -18,11 +18,11 @@ import { withSession } from '../middleware/withSession';
 
 //redirect client (google auth)
 router.get("/dashboard", (req, res) => {
-    res.redirect("blog-client-ivory-rho.vercel.app");
+    res.redirect("https://blog-client-ivory-rho.vercel.app");
 });
 
 router.get("/adminDashboard", (req, res) => {
-    res.redirect("blog-admin-vert.vercel.app");
+    res.redirect("https://blog-admin-vert.vercel.app");
 });
 
 // posts

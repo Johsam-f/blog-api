@@ -10,8 +10,8 @@ export const auth = betterAuth({
     }),
 
     trustedOrigins: [
-        "blog-client-ivory-rho.vercel.app", 
-        "blog-admin-vert.vercel.app"  
+        "https://blog-client-ivory-rho.vercel.app", 
+        "https://blog-admin-vert.vercel.app"  
     ],
 
     emailAndPassword: {
